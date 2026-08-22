@@ -98,7 +98,6 @@ Responsibilities:
 
 ## 4. System Flow
 
-```text
 Start
   ↓
 Collect Historical Sales Data
@@ -127,7 +126,8 @@ Generate Report
   ↓
 End
 
----
+
+=======
 
 5. UI Flow
 Login
@@ -155,8 +155,7 @@ Forecast Analysis
 Charts & Statistics
   ↓
 Download Report
-
---
+=====
 6. Inputs
 
 The system accepts the following data:
@@ -190,8 +189,8 @@ The system can support:
 CSV files
 Excel files
 Structured sales datasets
-----
 
+=====
 7. Outputs
 
 After processing the sales data, the system generates:
@@ -211,3 +210,4 @@ Product-wise forecast
 Store-wise forecast
 Forecast reports
 Downloadable results
+
