@@ -161,29 +161,29 @@ Download Report
 6. Inputs
 .The system accepts the following data:
 
-2.Sales Information
-3.Sales Date
-4.Product ID
-5.Product Name
-6.Store ID
-7.Store Location
-8.Quantity Sold
-9.Sales Revenue
-10.Unit Price
-11.Additional Information
-12.Promotion Information
-13.Holiday Information
-14.Discount Information
-15.Product Category
-16.Inventory Level
-17.Seasonal Information
-18.Forecasting Configuration
-19.Forecasting period
-20.Selected product
-21.Selected store
-22.Time frequency
-23.Forecasting model
-24.Dataset Upload
+2.Sales Information.
+3.Sales Date.
+4.Product ID.
+5.Product Name.
+6.Store ID.
+7.Store Location.
+8.Quantity Sold.
+9.Sales Revenue.
+10.Unit Price.
+11.Additional Information.
+12.Promotion Information.
+13.Holiday Information.
+14.Discount Information.
+15.Product Category.
+16.Inventory Level.
+17.Seasonal Information.
+18.Forecasting Configuration.
+19.Forecasting period.
+20.Selected product.
+21.Selected store.
+22.Time frequency.
+23.Forecasting model.
+24.Dataset Upload.
 
 The system can support:
 
@@ -199,19 +199,19 @@ Structured sales datasets
 
 After processing the sales data, the system generates:
 
-1.Historical sales analysis
-2.Sales trend charts
-3.Seasonal pattern analysis
-4.Product demand analysis
-5.Store-wise sales analysis
-6.Future demand predictions
-7.Forecasted sales values
-8.Prediction intervals
-9.Model accuracy results
-10.Model comparison
-11.Demand trend visualization
-12.Product-wise forecast
-13.Store-wise forecast
-14.Forecast reports
-15.Downloadable results
+1.Historical sales analysis.
+2.Sales trend charts.
+3.Seasonal pattern analysis.
+4.Product demand analysis.
+5.Store-wise sales analysis.
+6.Future demand predictions.
+7.Forecasted sales values.
+8.Prediction intervals.
+9.Model accuracy results.
+10.Model comparison.
+11.Demand trend visualization.
+12.Product-wise forecast.
+13.Store-wise forecast.
+14.Forecast reports.
+15.Downloadable results.
 
