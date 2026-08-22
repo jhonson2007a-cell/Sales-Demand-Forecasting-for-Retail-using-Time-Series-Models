@@ -156,6 +156,8 @@ Charts & Statistics
   ↓
 Download Report
 =====
+
+
 6. Inputs
 
 The system accepts the following data:
@@ -191,6 +193,9 @@ Excel files
 Structured sales datasets
 
 =====
+
+
+
 7. Outputs
 
 After processing the sales data, the system generates:
