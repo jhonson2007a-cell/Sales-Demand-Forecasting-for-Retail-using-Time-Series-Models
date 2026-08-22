@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RetailCast - Sales Demand Forecasting</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet" href="pro2.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSV Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.3/papaparse.min.js"></script>
+
+    <!-- Excel Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                RC
+            </div>
+
+            <div>
+                <h2>RetailCast</h2>
+                <span>Demand Intelligence</span>
+            </div>
+
+        </div>
+
+        <nav>
+
+            <button class="nav-item active" data-page="dashboard">
+                🏠 Dashboard
+            </button>
+
+            <button class="nav-item" data-page="upload">
+                📤 Upload Sales Data
+            </button>
+
+            <button class="nav-item" data-page="sales">
+                📊 Sales Analysis
+            </button>
+
+            <button class="nav-item" data-page="product">
+                📦 Product Analysis
+            </button>
+
+            <button class="nav-item" data-page="store">
+                🏪 Store Analysis
+            </button>
+
+            <button class="nav-item" data-page="forecast">
+                📈 Demand Forecasting
+            </button>
+
+            <button class="nav-item" data-page="models">
+                🤖 Model Comparison
+            </button>
+
+            <button class="nav-item" data-page="results">
+                ✅ Forecast Results
+            </button>
+
+            <button class="nav-item" data-page="reports">
+                📄 Reports
+            </button>
+
+            <hr>
+
+            <button class="nav-item" data-page="profile">
+                👤 Profile
+            </button>
+
+            <button class="nav-item" data-page="settings">
+                ⚙ Settings
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <span class="online"></span>
+
+            <div>
+                <strong>Demo Mode</strong>
+                <small>Frontend forecasting</small>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="title-area">
+
+                <button id="menuBtn" class="menu-btn">
+                    ☰
+                </button>
+
+                <div>
+                    <small>RETAIL ANALYTICS</small>
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button id="themeBtn" class="icon-btn">
+                    🌙
+                </button>
+
+                <div class="user">
+
+                    <div class="avatar">
+                        JL
+                    </div>
+
+                    <div>
+                        <strong>Project Admin</strong>
+                        <small>Administrator</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section class="page active" id="dashboard">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Dashboard</h2>
+                        <p>Retail sales and demand forecasting overview.</p>
+                    </div>
+
+                    <button class="primary-btn" data-page="forecast">
+                        + Generate Forecast
+                    </button>
+
+                </div>
+
+
+                <!-- FILTERS -->
+
+                <div class="filters">
+
+                    <select id="dashProduct">
+                        <option value="all">All Products</option>
+                    </select>
+
+                    <select id="dashStore">
+                        <option value="all">All Stores</option>
+                    </select>
+
+                    <select id="dashCategory">
+                        <option value="all">All Categories</option>
+                    </select>
+
+                    <button id="resetFilters">
+                        Reset
+                    </button>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats" id="dashboardStats"></div>
+
+
+                <!-- CHARTS -->
+
+                <div class="chart-grid">
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            <div>
+                                <h3>Sales Trend</h3>
+                                <span>Daily sales performance</span>
+                            </div>
+                        </div>
+
+                        <div class="chart-box">
+                            <canvas id="salesTrend"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            <div>
+                                <h3>Monthly Sales</h3>
+                                <span>Monthly revenue</span>
+                            </div>
+                        </div>
+
+                        <div class="chart-box">
+                            <canvas id="monthlySales"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-grid">
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            <h3>Product-wise Sales</h3>
+                        </div>
+
+                        <div class="chart-box">
+                            <canvas id="productSales"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            <h3>Store-wise Sales</h3>
+                        </div>
+
+                        <div class="chart-box">
+                            <canvas id="storeSales"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= UPLOAD ================= -->
+
+            <section class="page" id="upload">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Upload Sales Data</h2>
+                        <p>Upload your retail CSV or Excel dataset.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card upload-card">
+
+                    <div id="dropArea">
+
+                        <div class="upload-icon">
+                            📤
+                        </div>
+
+                        <h3>Upload Sales Dataset</h3>
+
+                        <p>
+                            Drag & drop your file here
+                            or select a file
+                        </p>
+
+                        <input
+                            type="file"
+                            id="fileInput"
+                            accept=".csv,.xlsx,.xls"
+                            hidden
+                        >
+
+                        <button
+                            class="secondary-btn"
+                            id="chooseFile">
+                            Choose File
+                        </button>
+
+                        <small>
+                            Supported: CSV, XLSX, XLS
+                        </small>
+
+                    </div>
+
+                    <div id="uploadMessage"></div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        <div>
+                            <h3>Dataset Preview</h3>
+                            <span id="datasetInfo">
+                                Sample data loaded
+                            </span>
+                        </div>
+
+                        <button
+                            class="secondary-btn"
+                            id="downloadSample">
+                            Download Sample
+                        </button>
+
+                    </div>
+
+                    <div class="table-container">
+                        <table id="dataTable"></table>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SALES ================= -->
+
+            <section class="page" id="sales">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Sales Analysis</h2>
+                        <p>Analyze revenue and sales performance.</p>
+                    </div>
+
+                </div>
+
+                <div class="stats" id="salesStats"></div>
+
+                <div class="chart-grid">
+
+                    <div class="card">
+
+                        <h3>Actual vs Predicted Sales</h3>
+
+                        <div class="chart-box">
+                            <canvas id="actualPredicted"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>Monthly Sales</h3>
+
+                        <div class="chart-box">
+                            <canvas id="salesMonthly"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PRODUCT ================= -->
+
+            <section class="page" id="product">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Product Analysis</h2>
+                        <p>Compare product sales and demand.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Product-wise Sales</h3>
+
+                    <div class="chart-box large">
+                        <canvas id="productAnalysis"></canvas>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Product Performance</h3>
+
+                    <div class="table-container">
+                        <table id="productTable"></table>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= STORE ================= -->
+
+            <section class="page" id="store">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Store Analysis</h2>
+                        <p>Compare sales performance across stores.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Store-wise Sales</h3>
+
+                    <div class="chart-box large">
+                        <canvas id="storeAnalysis"></canvas>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Store Performance</h3>
+
+                    <div class="table-container">
+                        <table id="storeTable"></table>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= FORECAST ================= -->
+
+            <section class="page" id="forecast">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Demand Forecasting</h2>
+                        <p>Configure and generate future demand.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="forecast-form">
+
+                        <div>
+                            <label>Product</label>
+
+                            <select id="forecastProduct">
+                                <option value="all">All Products</option>
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label>Store</label>
+
+                            <select id="forecastStore">
+                                <option value="all">All Stores</option>
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label>Category</label>
+
+                            <select id="forecastCategory">
+                                <option value="all">All Categories</option>
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label>Forecast Period</label>
+
+                            <select id="forecastPeriod">
+                                <option value="7">7 Days</option>
+                                <option value="14">14 Days</option>
+                                <option value="30" selected>
+                                    30 Days
+                                </option>
+                                <option value="60">60 Days</option>
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label>Forecast Model</label>
+
+                            <select id="forecastModel">
+                                <option>Moving Average</option>
+                                <option>Exponential Smoothing</option>
+                                <option>ARIMA</option>
+                                <option>SARIMA</option>
+                                <option>Prophet</option>
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label>Confidence Level</label>
+
+                            <select id="confidence">
+                                <option>80%</option>
+                                <option selected>95%</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="forecast-action">
+
+                        <button
+                            class="primary-btn"
+                            id="generateForecast">
+                            ⚡ Generate Forecast
+                        </button>
+
+                        <span>
+                            Frontend demo — connect Flask/FastAPI
+                            for real ML models.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-grid">
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            <h3>Future Demand Forecast</h3>
+                            <span id="forecastStatus">
+                                Waiting for forecast
+                            </span>
+                        </div>
+
+                        <div class="chart-box">
+                            <canvas id="forecastChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>Forecast Summary</h3>
+
+                        <div id="forecastSummary"
+                             class="summary">
+                            Select model and click
+                            <b>Generate Forecast</b>.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= MODELS ================= -->
+
+            <section class="page" id="models">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Model Comparison</h2>
+                        <p>Compare time-series forecasting models.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Model Accuracy</h3>
+
+                    <div class="chart-box">
+                        <canvas id="modelChart"></canvas>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="table-container">
+                        <table id="modelTable"></table>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RESULTS ================= -->
+
+            <section class="page" id="results">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Forecast Results</h2>
+                        <p>Latest generated demand prediction.</p>
+                    </div>
+
+                    <div class="button-group">
+
+                        <button
+                            class="secondary-btn"
+                            id="downloadForecast">
+                            Download CSV
+                        </button>
+
+                        <button
+                            class="secondary-btn"
+                            id="printResults">
+                            Print
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stats" id="resultStats"></div>
+
+
+                <div class="card">
+
+                    <div class="table-container">
+                        <table id="forecastTable"></table>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= REPORTS ================= -->
+
+            <section class="page" id="reports">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Reports</h2>
+                        <p>Create a project report summary.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card report" id="report">
+
+                    <div class="report-header">
+
+                        <div class="brand-logo">
+                            RC
+                        </div>
+
+                        <div>
+                            <h2>
+                                Retail Demand Forecast Report
+                            </h2>
+
+                            <p>
+                                Sales Demand Forecasting for Retail
+                                using Time-Series Models
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div id="reportContent"></div>
+
+                </div>
+
+
+                <div class="button-group">
+
+                    <button
+                        class="primary-btn"
+                        id="downloadReport">
+                        Download Report
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        id="printReport">
+                        Print Report
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <section class="page" id="profile">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Profile</h2>
+                        <p>Project administrator profile.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card profile-card">
+
+                    <div class="profile-avatar">
+                        JL
+                    </div>
+
+                    <div class="profile-form">
+
+                        <label>
+                            Full Name
+                            <input value="Project Admin">
+                        </label>
+
+                        <label>
+                            Email
+                            <input value="admin@college.edu">
+                        </label>
+
+                        <label>
+                            Role
+                            <input value="Administrator" disabled>
+                        </label>
+
+                        <label>
+                            Project
+                            <input
+                                value="Sales Demand Forecasting">
+                        </label>
+
+                        <button
+                            class="primary-btn"
+                            id="saveProfile">
+                            Save Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SETTINGS ================= -->
+
+            <section class="page" id="settings">
+
+                <div class="page-header">
+
+                    <div>
+                        <h2>Settings</h2>
+                        <p>Customize your dashboard.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card settings">
+
+                    <div class="setting">
+
+                        <div>
+                            <strong>Dark Mode</strong>
+
+                            <small>
+                                Switch between light and dark mode.
+                            </small>
+                        </div>
+
+                        <label class="switch">
+                            <input type="checkbox"
+                                   id="darkSetting">
+                            <span></span>
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting">
+
+                        <div>
+                            <strong>Notifications</strong>
+
+                            <small>
+                                Show forecast notifications.
+                            </small>
+                        </div>
+
+                        <label class="switch">
+                            <input type="checkbox"
+                                   checked>
+                            <span></span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div id="toast"></div>
+
+<script src="pro3.js"></script>
+
+</body>
+</html>
