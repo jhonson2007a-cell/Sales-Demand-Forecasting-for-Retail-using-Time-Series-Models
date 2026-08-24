@@ -214,4 +214,3 @@ After processing the sales data, the system generates:
 13.Store-wise forecast.
 14.Forecast reports.
 15.Downloadable results.
-
