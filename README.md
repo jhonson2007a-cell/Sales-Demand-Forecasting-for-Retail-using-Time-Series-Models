@@ -124,7 +124,7 @@ Visualize Forecast
   ↓
 Generate Report
   ↓
-Ends
+End
 
 
 =======
