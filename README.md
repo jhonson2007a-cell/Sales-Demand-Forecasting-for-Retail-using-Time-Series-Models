@@ -124,7 +124,7 @@ Visualize Forecast
   ↓
 Generate Report
   ↓
-End
+Ends
 
 
 =======
@@ -192,7 +192,6 @@ Excel files
 Structured sales datasets
 
 =====
-
 
 
 7. Outputs
