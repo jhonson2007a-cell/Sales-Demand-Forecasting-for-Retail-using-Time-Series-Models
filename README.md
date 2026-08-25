@@ -194,7 +194,6 @@ Structured sales datasets
 =====
 
 
-
 7. Outputs
 
 After processing the sales data, the system generates:
