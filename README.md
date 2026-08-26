@@ -159,8 +159,9 @@ Download Report
 
 
 6. Inputs
-.The system accepts the following data:
 
+
+1.The system accepts the following data:
 2.Sales Information.
 3.Sales Date.
 4.Product ID.
@@ -197,7 +198,6 @@ Structured sales datasets
 7. Outputs
 
 After processing the sales data, the system generates:
-
 1.Historical sales analysis.
 2.Sales trend charts.
 3.Seasonal pattern analysis.
@@ -213,7 +213,10 @@ After processing the sales data, the system generates:
 13.Store-wise forecast.
 14.Forecast reports.
 15.Downloadable results.
+
 ===
 
 8.MEMBERS NAME
+
 1.JHONSON LAHRE
+2.ABHYASH SINGH
