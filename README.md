@@ -218,5 +218,5 @@ After processing the sales data, the system generates:
 
 8.MEMBERS NAME
 
-1.JHONSON LAHRE
-2.ABHYASH SINGH
+1.JHONSON LAHRE.
+2.ABHYASH SINGH.
