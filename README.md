@@ -220,4 +220,6 @@ After processing the sales data, the system generates:
 
 -1.ABHYASH SINGH(LEADER).
 
+-2.JHONSON LAHRE.
+
 
